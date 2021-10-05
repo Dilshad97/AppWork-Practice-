@@ -116,8 +116,9 @@ class _Screen_2State extends State<Screen_2> {
                     },),
                 ),
                 Text("Singer (1)",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30),),
+                SizedBox(height: 15,),
                 Container(
-                  height: 200,
+                  height: 150,
                   child: ListView.builder(
                     itemCount: Items.length,
                     shrinkWrap: true,
@@ -128,7 +129,7 @@ class _Screen_2State extends State<Screen_2> {
 
                           CircleAvatar(
                             radius: 50,
-                            backgroundColor: Colors.grey,
+                            backgroundColor: Colors.blueGrey,
                             backgroundImage: NetworkImage(Items[index]["image"]),
                           ),
                           Text(Items[index]["tittle"],style: TextStyle(fontSize: 22,fontWeight: FontWeight.w400)),
