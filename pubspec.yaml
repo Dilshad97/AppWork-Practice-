@@ -44,6 +44,8 @@ dependencies:
   flutter_cart:
   url_launcher:
   cached_network_image:
+  flappy_search_bar:
+  fluttertoast:
 
 dev_dependencies:
   flutter_test:

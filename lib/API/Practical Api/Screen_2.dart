@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart'as http;
 
 class Screen_2 extends StatefulWidget {
-  const Screen_2({Key? key}) : super(key: key);
+  const Screen_2( {Key? key}) : super(key: key);
 
   @override
   _Screen_2State createState() => _Screen_2State();
@@ -20,8 +21,7 @@ class _Screen_2State extends State<Screen_2> {
     super.initState();
     onNotificationLoad();
   }
-
-  final List Items = [
+  final List items = [
     {
       "image": "https://www.gstatic.com/images/branding/product/2x/photos_96dp.png",
       "tittle":"dilshad",
@@ -31,7 +31,7 @@ class _Screen_2State extends State<Screen_2> {
       "tittle":"dilshad",
     },
   ];
-
+TextEditingController cntrl =TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +41,8 @@ class _Screen_2State extends State<Screen_2> {
             title:Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
+               onChanged: onItemChanged,
+                controller: cntrl,
                 decoration: InputDecoration(
                     fillColor: Colors.white,
                     filled: true,
@@ -68,19 +70,22 @@ class _Screen_2State extends State<Screen_2> {
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      return Container(
+                      return  Container(
                         child: Column(
                           children: [
                             Card(
                               child: Container(
                                   width: 160,
                                   height: 160,
-                                  child:Image.network(notificationList[index]["thumbnail_image"])
+                                  child:CachedNetworkImage(
+                                    placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+                                    imageUrl: notificationList[index]["thumbnail_image"] ,
+                                  ),
                               ),
                             ),
                             Container(
                                 width: 180,
-                                child: Text(notificationList[index]["singer_name"],textAlign: TextAlign.center,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),)),
+                                child: Text(notificationList[index]["gallery_id"],textAlign: TextAlign.center,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),)),
                           ],
                         ),
                       );
@@ -102,7 +107,9 @@ class _Screen_2State extends State<Screen_2> {
                             child: Container(
                                 width: 160,
                                 height: 160,
-                                child:Image.network(albumList[index]["thumbnail_name"])
+                                child:  CachedNetworkImage(
+                                  placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+                                    imageUrl: albumList[index]["thumbnail_name"]),
                             ),
                           ),
                           Container(
@@ -128,7 +135,10 @@ class _Screen_2State extends State<Screen_2> {
                             child: Container(
                                 width: 160,
                                 height: 160,
-                                child:Image.network(occasionList[index]["occasion_image"])
+                                child: CachedNetworkImage(
+                                  placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+                                imageUrl:occasionList[index]["occasion_image"] ,
+                                ),
                             ),
                           ),
                           Container(
@@ -154,7 +164,11 @@ class _Screen_2State extends State<Screen_2> {
                           CircleAvatar(
                             radius: 50,
                             backgroundColor: Colors.blueGrey,
-                            backgroundImage: NetworkImage(singerList[index]["singer_image"]),
+                            backgroundImage:CachedNetworkImageProvider(
+                              singerList[index]["singer_image"],
+                            )
+
+                            // NetworkImage(singerList[index]["singer_image"]),
                           ),
                           Container(
                               width: 160,
@@ -168,7 +182,7 @@ class _Screen_2State extends State<Screen_2> {
                 Container(
                   height: 200,
                   child: ListView.builder(
-                    itemCount: Items.length,
+                    itemCount: items.length,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
@@ -179,10 +193,14 @@ class _Screen_2State extends State<Screen_2> {
                             child: Container(
                                 width: 160,
                                 height: 160,
-                                child:Image.network(Items[index]["image"])
+
+                                child: CachedNetworkImage(
+                                  placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+                                  imageUrl: items[index]["image"],
+                                ),
                             ),
                           ),
-                          Text(Items[index]["tittle"],style: TextStyle(fontSize: 22,fontWeight: FontWeight.w400)),
+                          Text(items[index]["tittle"],style: TextStyle(fontSize: 22,fontWeight: FontWeight.w400)),
                         ],
                       );
 
@@ -192,6 +210,18 @@ class _Screen_2State extends State<Screen_2> {
             ),
           ),
         ));
+  }
+
+
+
+
+
+  onItemChanged(String value) {
+    setState(() {
+      notificationList
+          .where((string) => string.toLowerCase().contains(value.toLowerCase()))
+          .toList();
+    });
   }
 
 
