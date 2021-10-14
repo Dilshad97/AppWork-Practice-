@@ -1,10 +1,7 @@
-import 'package:appwork/API/Post_Office_Api/Post_Office_Api.dart';
-import 'package:appwork/API/Practice_Api2/Api_No_3.dart';
-import 'package:appwork/API/Practice_Api2/Api_No_4.dart';
-import 'package:appwork/Flutter_Toast/Toast.dart';
+
 import 'package:flutter/material.dart';
 
-import 'API/Practice_Api2/Api_No_2.dart';
+import 'API/News_Api/News1.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,7 +12,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(),
-      home: Post_Office_Api(),
+      home: News1(),
 
     );
   }
