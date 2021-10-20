@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'API/News_Api/News1.dart';
+import 'Inherited Widget/Inherited Widget.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(),
-      home: News1(),
+      home: InheritedWidgetExample(),
 
     );
   }
