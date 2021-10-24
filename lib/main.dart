@@ -1,19 +1,18 @@
 
 import 'package:flutter/material.dart';
+import 'Water Drinking/Bottom Bar.dart';
 
-import 'API/News_Api/News1.dart';
-import 'Inherited Widget/Inherited Widget.dart';
-
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // Remove the debug banner
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(),
-      home: InheritedWidgetExample(),
+      home: NavBar(),
 
     );
   }
